@@ -1,0 +1,65 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ManagerMapper">
+	<resultMap id="ManagerMap" type="study.spring.simplespring.model.Manager">
+		<result property="managerid"	column="managerid" />
+		<result property="name"		column="servicetype" />
+		<result property="m_tel"	column="pmttype" />
+		<result property="m_email"	column="servicebank" />
+		<result property="m_content"		column="payername" />
+		<result property="m_position"	column="card" />
+		<result property="memberid"		column="pmtplan" />
+		<result property="m_name"		column="m_name" />
+		<result property="m_tel"	column="m_tel" />
+		<result property="m_email"	column="m_email" />
+		<result property="m_content"		column="m_content" />
+		
+
+	</resultMap>
+	
+	<select id="selectItem"
+		parameterType="study.spring.simplespring.model.Manager"
+		resultMap="ManagerMap">
+		SELECT *
+		from Manager WHERE managerid=#{managerid}
+		
+	</select>
+	
+    <select id="selectList"
+        parameterType="study.spring.simplespring.model.Manager"
+        resultMap="ManagerMap">
+        SELECT * from manager
+        
+    </select>
+
+<select id="selectItem1"
+	parameterType="study.spring.simplespring.model.Manager"
+	resultMap="ManagerMap">
+		SELECT *
+		from Manager WHERE managerid=1
+	</select>
+	<select id="selectItem2"
+	parameterType="study.spring.simplespring.model.Manager"
+	resultMap="ManagerMap">
+		SELECT *
+		from Manager WHERE managerid=2
+	</select>
+	<select id="selectItem3"
+	parameterType="study.spring.simplespring.model.Manager"
+	resultMap="ManagerMap">
+		SELECT *
+		from Manager WHERE managerid=3
+	</select>
+	<select id="selectItem4"
+	parameterType="study.spring.simplespring.model.Manager"
+	resultMap="ManagerMap">
+		SELECT *
+		from Manager WHERE managerid=4
+	</select>
+	<select id="selectItem5"
+	parameterType="study.spring.simplespring.model.Manager"
+	resultMap="ManagerMap">
+		SELECT *
+		from Manager WHERE managerid=5
+	</select>
+</mapper>

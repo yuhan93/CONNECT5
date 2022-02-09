@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+	#loc{
+         width:500px; height: 300px;
+         margin-left:180px;
+
+      }
+      
+      p, h4,{
+      margin-left:150px;
+ 
+      }
+      
+      #comeon{
+      margin-left:120px;
+      }

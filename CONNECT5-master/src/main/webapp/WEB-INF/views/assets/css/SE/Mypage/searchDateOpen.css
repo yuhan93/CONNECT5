@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+/** DatePicker의 글꼴 설정 */
+.datepicker-container {
+	font-family: 'Helvetica', '나눔고딕', '맑은고딕'
+}
+/** 이미지와 input요소간의 정렬 설정 */
+input, img {
+	vertical-align: middle;
+}
+
+#date {
+	margin: auto;
+	height: 100px;
+}

@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+hr {
+	text-align: center;
+}
+
+.center {
+	height: 800px;
+}
+
+.aaaa {
+	position: absolute;
+	left: -50px;
+	top: 130px;
+	font-size: 20px;
+}
+
+.content {
+	position: relative;
+	top: 100px;
+	left: 220px;
+}
+
+.content img {
+	width: 450px;
+}
+
+.buttom {
+	padding-left: 105px;
+}
+
+.b1 {
+	text-align: center;
+}

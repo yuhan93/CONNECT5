@@ -1,0 +1,28 @@
+@charset "EUC-KR";
+
+.aaaa {
+	top: 130px;
+	left: 15px;
+	position: absolute;
+}
+
+.content {
+	position: relative;
+	top: 0px;
+}
+
+.boximg {
+	float: left;
+}
+
+hr {
+	margin-top: 60px;
+}
+
+.center {
+	height: 900px;
+}
+
+.buttom {
+text-align: center;
+}

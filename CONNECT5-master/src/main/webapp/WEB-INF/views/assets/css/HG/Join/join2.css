@@ -1,0 +1,44 @@
+@charset "EUC-KR";
+
+h, td, tr, input, textarea, select, FORM {
+   font-family: °íµñ;
+   font-size: 1em;
+}
+
+.box10 {
+   width: 900px;
+}
+
+.buttom {
+   text-align: center;
+}
+
+.box11 {
+   background-color: #ffe1e6;
+   text-align: center;
+   border: 1px solid #bdbdbd;
+   width: 124px;
+   height: 25px;
+}
+
+.box12 {
+   padding-left: 10px;
+   border: 1px solid #bdbdbd;
+   height: 35px;
+   width: 400px;
+}
+
+.box14 {
+   padding-left: 10px;
+   border: 1px solid #bdbdbd;
+   width: 250px;
+   height: 35px;
+}
+
+.box13 {
+   background-color: #ffe1e6;
+   text-align: center;
+   border: 1px solid #bdbdbd;
+   width: 124px;
+   height: 35px;
+}

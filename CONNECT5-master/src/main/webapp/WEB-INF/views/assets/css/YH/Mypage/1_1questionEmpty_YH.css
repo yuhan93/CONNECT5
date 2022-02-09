@@ -1,0 +1,29 @@
+@charset "utf-8";
+
+.btn {
+	float: right;
+}
+
+#question1 {
+	text-align: center;
+	height: 300px;
+	padding-top: 130px;
+	font-size: 2em;
+	user-select: none;
+}
+
+.content{
+	text-align: center;
+}
+.num{
+	width: 80px;
+}
+.name{
+	width: 80px;
+}
+.date{
+	width: 100px;
+}
+.reply{
+	width: 80px;
+}

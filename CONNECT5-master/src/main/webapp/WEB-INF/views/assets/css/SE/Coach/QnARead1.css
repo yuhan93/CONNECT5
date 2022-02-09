@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+.table th {
+	text-align: center;
+}
+
+.table-responsive #num {
+	width: 90px;
+}
+
+.table-responsive #date {
+	width: 50px;
+}
+
+.dropdown {
+	float: right;
+	padding-bottom: 10px;
+}
+
+#pagination {
+	width: 270px;
+	margin: auto;
+}
+
+#context {
+	height: 300px;
+}

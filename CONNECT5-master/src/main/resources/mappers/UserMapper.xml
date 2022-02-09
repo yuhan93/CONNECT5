@@ -1,0 +1,892 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserMapper">
+
+	<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+	<resultMap id="userMap"
+		type="study.spring.simplespring.model.User">
+		<result property="MemberId" column="MemberId" />
+		<result property="UserId" column="UserId" />
+		<result property="UserPw" column="UserPw" />
+		<result property="UserName" column="UserName" />
+		<result property="UserName1" column="un" />
+		<result property="BirthDate" column="BirthDate" />
+		<result property="Gender" column="Gender" />
+		<result property="Gender1" column="gd" />
+		<result property="IsMarried" column="IsMarried" />
+		<result property="Mobile" column="Mobile" />
+		<result property="TEL" column="TEL" />
+		<result property="Email" column="Email" />
+		<result property="PostCode" column="PostCode" />
+		<result property="BasicAddress" column="BasicAddress" />
+		<result property="StateAddress" column="StateAddress" />
+		<result property="DetailAddress" column="DetailAddress" />
+		<result property="isadmin" column="isadmin" />
+		<result property="Member_Lv" column="Member_Lv" />
+		<result property="Job" column="Job" />
+		<result property="Edu_Lv" column="Edu_Lv" />
+		<result property="User_Img" column="User_Img" />
+		<result property="Height" column="Height" />
+		<result property="BldType" column="BldType" />
+		<result property="Date_Loc" column="Date_Loc" />
+		<result property="Style" column="Style" />
+		<result property="Personality" column="Personality" />
+		<result property="Sal_Annual" column="Sal_Annual" />
+		<result property="Date_Count" column="Date_Count" />
+		<result property="Date_Rest" column="Date_Rest" />
+		<result property="isSpUser" column="isSpUser" />
+		<result property="ManagerId" column="ManagerId" />
+		<result property="start" column="start" />
+		<result property="ReqSpService" column="ReqSpService" />
+		<result property="SucMatchId" column="SucMatchId" />
+		
+	</resultMap>
+
+	<!-- insert -->
+	<insert id="insertItem"
+		parameterType="study.spring.simplespring.model.User"
+		useGeneratedKeys="true" keyProperty="MemberId">
+		INSERT INTO User (
+		MemberId,
+		UserId, UserPw, UserName, BirthDate, Gender, IsMarried, Mobile, TEL,
+		Email, PostCode, BasicAddress, StateAddress, DetailAddress, isadmin,
+		Member_Lv
+		)
+		VALUES (
+		#{MemberId}, #{UserId}, #{UserPw}, #{UserName},
+		#{BirthDate},
+		#{Gender}, #{IsMarried}, #{Mobile}, #{TEL},
+		#{Email},
+		#{PostCode},
+		#{BasicAddress}, #{StateAddress}, #{DetailAddress}, 0, 0
+		)
+	</insert>
+
+	<select id="IdCheck"
+		parameterType="study.spring.simplespring.model.User"
+		resultMap="userMap">
+		SELECT * FROM User
+		WHERE UserId=#{UserId}
+	</select>
+
+	<select id="selectItem"
+		parameterType="study.spring.simplespring.model.User"
+		resultMap="userMap">
+		SELECT *
+		FROM User
+		WHERE MemberId=#{MemberId}
+	</select>
+	
+	<select id="selectItem_Gender"
+		parameterType="study.spring.simplespring.model.User"
+		resultType="int">
+		SELECT Gender
+		FROM User
+		WHERE MemberId=#{MemberId}
+	</select>
+	
+	
+	<select id="selectItemFindId"
+		parameterType="study.spring.simplespring.model.User"
+		resultMap="userMap">
+		SELECT *
+		FROM User
+		WHERE UserName=#{UserName}
+	</select>
+
+	<select id="selectList"
+		parameterType="study.spring.simplespring.model.User"
+		resultMap="userMap">
+		SELECT * FROM connect5.user
+
+
+	</select>
+	
+	<select id="selectModalList"
+		parameterType="study.spring.simplespring.model.User"
+		resultMap="userMap">
+		SELECT u.*,r.start FROM connect5.user u
+		INNER JOIN
+		connect5.ReqMatch r ON (u.MemberId = r.MemberId) AND r.start =
+		#{start}
+
+	</select>
+
+	<select id="selectModalList1"
+		parameterType="study.spring.simplespring.model.User"
+		resultMap="userMap">
+		SELECT u.*,r.start FROM connect5.user u
+		INNER JOIN
+		connect5.ReqMatch r ON (u.MemberId = r.MemberId)
+		AND r.start = #{start}
+		AND u.member_lv = 1
+
+	</select>
+
+	<select id="selectModalList1_1"
+		parameterType="study.spring.simplespring.model.User"
+		resultMap="userMap">
+		SELECT u.*,r.start FROM connect5.user u
+		INNER JOIN
+		connect5.ReqMatch r ON (u.MemberId = r.MemberId)
+		AND r.start = #{start}
+		AND (u.member_lv = 1 OR u.member_lv = 2)
+
+	</select>
+
+	<select id="selectModalList2"
+		parameterType="study.spring.simplespring.model.User"
+		resultMap="userMap">
+		SELECT u.*,r.start FROM connect5.user u
+		INNER JOIN
+		connect5.ReqMatch r ON (u.MemberId = r.MemberId)
+		AND r.start = #{start}
+		AND u.member_lv = 2
+
+	</select>
+
+	<select id="selectModalList2_1"
+		parameterType="study.spring.simplespring.model.User"
+		resultMap="userMap">
+		SELECT u.*,r.start FROM connect5.user u
+		INNER JOIN
+		connect5.ReqMatch r ON (u.MemberId = r.MemberId)
+		AND r.start = #{start}
+		AND (u.member_lv = 2 OR u.member_lv = 3)
+
+	</select>
+
+	<select id="selectModalList3"
+		parameterType="study.spring.simplespring.model.User"
+		resultMap="userMap">
+		SELECT u.*,r.start FROM connect5.user u
+		INNER JOIN
+		connect5.ReqMatch r ON (u.MemberId = r.MemberId)
+		AND r.start = #{start}
+		AND u.member_lv = 3
+
+	</select>
+
+	<select id="selectModalList3_1"
+		parameterType="study.spring.simplespring.model.User"
+		resultMap="userMap">
+		SELECT u.*,r.start FROM connect5.user u
+		INNER JOIN
+		connect5.ReqMatch r ON (u.MemberId = r.MemberId)
+		AND r.start = #{start}
+		AND (u.member_lv = 3 OR u.member_lv = 4)
+
+	</select>
+
+	<select id="selectModalList4"
+		parameterType="study.spring.simplespring.model.User"
+		resultMap="userMap">
+		SELECT u.*,r.start FROM connect5.user u
+		INNER JOIN
+		connect5.ReqMatch r ON (u.MemberId = r.MemberId)
+		AND r.start = #{start}
+		AND u.member_lv = 4
+
+	</select>
+
+	<select id="selectSucModalList"
+		parameterType="study.spring.simplespring.model.User"
+		resultMap="userMap">
+		SELECT s.SucMatchId, u.UserName, u.Gender,r.start, s.MemberId, uu.username as un, uu.gender as gd from connect5.user u
+		inner join connect5.reqmatch r ON (r.MemberId=u.MemberId) 
+		inner join connect5.sucmatch s ON (s.ReqmatchId=r.ReqMatchId)
+		inner join connect5.user uu On (s.MemberId = uu.MemberId)
+		AND r.start=#{start} AND s.status = 2
+		
+	</select>
+
+	<select id="selectListadminUser"
+		parameterType="study.spring.simplespring.model.User"
+		resultMap="userMap">
+		SELECT * FROM connect5.user WHERE isadmin=0
+
+		<choose>
+			<when test="UserName != null and UserName != ''">
+				AND UserName LIKE concat('%', #{UserName}, '%')
+			</when>
+
+			<when test="UserId != null and UserId != ''">
+				AND UserId LIKE concat('%', #{UserId}, '%')
+			</when>
+		</choose>
+
+		ORDER BY MemberId DESC
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount}
+		</if>
+	</select>
+
+
+	<select id="selectItemadminUser"
+		parameterType="study.spring.simplespring.model.User"
+		resultMap="userMap">
+		SELECT * FROM connect5.user Where MemberId = #{MemberId}
+	</select>
+
+	<update id="updateItemadmin"
+		parameterType="study.spring.simplespring.model.User">
+		UPDATE User SET UserPw = #{UserPw}
+		WHERE
+		MemberId=#{MemberId}
+
+	</update>
+
+	<update id="updateIteminformation"
+		parameterType="study.spring.simplespring.model.User">
+		UPDATE User SET User_Img=#{User_Img},
+		UserName=#{UserName}, UserId=#{UserId},
+		Gender=#{Gender},
+		UserPw=#{UserPw}, Mobile=#{Mobile}, TEL=#{TEL}, Email=#{Email},
+		PostCode=#{PostCode}, BasicAddress=#{BasicAddress},
+		StateAddress=#{StateAddress},
+		DetailAddress=#{DetailAddress}
+		WHERE
+		MemberId=#{MemberId}
+
+	</update>
+	<!-- 삭제 -->
+	<delete id="deleteItem"
+		parameterType="study.spring.simplespring.model.User">
+		DELETE FROM User WHERE MemberId=#{MemberId}
+	</delete>
+
+	<update id="unsetBoard"
+		parameterType="study.spring.simplespring.model.User">
+		UPDATE connect5.Board SET MemberId=null WHERE
+		MemberId=#{MemberId}
+	</update>
+
+
+	<update id="unsetManager"
+		parameterType="study.spring.simplespring.model.User">
+		UPDATE connect5.Manager SET MemberId=null WHERE
+		MemberId=#{MemberId}
+	</update>
+
+	<update id="unsetReply"
+		parameterType="study.spring.simplespring.model.User">
+		UPDATE connect5.Reply SET MemberId=null WHERE
+		MemberId=#{MemberId}
+	</update>
+
+	<update id="unsetPayMent"
+		parameterType="study.spring.simplespring.model.User">
+		UPDATE connect5.Payment SET MemberId=null WHERE
+		MemberId=#{MemberId}
+	</update>
+
+	<update id="unsetSucMatch"
+		parameterType="study.spring.simplespring.model.User">
+		UPDATE connect5.SucMatch SET MemberId=null WHERE
+		MemberId=#{MemberId}
+	</update>
+
+	<update id="unsetReqMatch"
+		parameterType="study.spring.simplespring.model.User">
+		UPDATE connect5.ReqMatch SET MemberId=null WHERE
+		MemberId=#{MemberId}
+	</update>
+	<!-- 삭제 참조 해제 -->
+
+	<select id="selectLoginInfo"
+		parameterType="study.spring.simplespring.model.User"
+		resultMap="userMap">
+
+		SELECT
+		* FROM User
+		WHERE UserId=#{UserId} AND UserPw=#{UserPw}
+
+	</select>
+	<!-- 경동 회원정보 변경 쿼리문 -->
+	<update id="updateItemPw"
+		parameterType="study.spring.simplespring.model.User">
+		UPDATE user
+		SET UserPw=#{UserPw}
+		WHERE
+		UserId=#{UserId};
+	</update>
+
+
+	<!-- 경동 회원정보 변경 쿼리문 -->
+	<update id="updateItem"
+		parameterType="study.spring.simplespring.model.User">
+		UPDATE user
+		SET member_lv=#{member_lv} ,
+		date_rest=#{date_rest}, managerid=#{managerid}
+		WHERE
+		UserName=#{UserName};
+	</update>
+	<!-- 경동 아이디 찾기 조회 쿼리문 -->
+	<select id="selectFindaccount"
+		parameterType="study.spring.simplespring.model.User"
+		resultMap="userMap">
+
+		select * from user
+		where UserName=#{UserName} and
+		email=#{email}
+
+	</select>
+	<select id="selectFindPassword"
+		parameterType="study.spring.simplespring.model.User"
+		resultMap="userMap">
+
+		select * from user
+		where UserName=#{UserName} and
+		UserId=#{UserId} and
+		Email=#{Email}
+
+	</select>
+
+
+
+
+
+	<!-- 데이터 수 조회를 위한 기능 정의 -->
+	<select id="selectCountAll"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+		SELECT COUNT(*)
+		FROM User
+
+	</select>
+
+	<!-- 경동 회원정보 변경 쿼리문 -->
+	<update id="Special_updateItem"
+		parameterType="study.spring.simplespring.model.User">
+		UPDATE user
+		SET Job=#{Job} ,Edu_Lv=#{Edu_Lv},
+		User_Img=#{User_Img},Height=#{Height}, BldType=#{BldType},
+		Style=#{Style}, Personality=#{Personality},
+		Sal_Annual=#{Sal_Annual},Date_Loc=#{Date_Loc}
+		WHERE
+		MemberId=#{MemberId};
+	</update>
+
+
+
+
+
+	<!-- 회원 그래프 -->
+	<!-- 남녀 회원 수 -->
+	<select id="selectCountGenderMen"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User WHERE Gender = 0
+
+	</select>
+
+	<select id="selectCountGenderWomen"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User WHERE Gender = 1
+
+	</select>
+
+	<!-- 연봉범위별 남녀 회원 수 -->
+	<select id="selectCountAnnualSalary0010M"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Sal_Annual BETWEEN 0 AND 1999 AND
+		GENDER = 0
+
+	</select>
+
+	<select id="selectCountAnnualSalary0010W"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Sal_Annual BETWEEN 0 AND 1999 AND
+		GENDER = 1
+
+	</select>
+
+	<select id="selectCountAnnualSalary2000M"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Sal_Annual BETWEEN 2000 AND 2999 AND
+		GENDER = 0
+
+	</select>
+
+	<select id="selectCountAnnualSalary2000W"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Sal_Annual BETWEEN 2000 AND 2999 AND
+		GENDER = 1
+
+	</select>
+
+	<select id="selectCountAnnualSalary3000M"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Sal_Annual BETWEEN 3000 AND 3999 AND
+		GENDER = 0
+
+	</select>
+
+	<select id="selectCountAnnualSalary3000W"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Sal_Annual BETWEEN 3000 AND 3999 AND
+		GENDER = 1
+
+	</select>
+
+	<select id="selectCountAnnualSalary4000M"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Sal_Annual BETWEEN 4000 AND 4999 AND
+		GENDER = 0
+
+	</select>
+
+	<select id="selectCountAnnualSalary4000W"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Sal_Annual BETWEEN 4000 AND 4999 AND
+		GENDER = 1
+
+	</select>
+
+
+	<select id="selectCountAnnualSalary5000M"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Sal_Annual BETWEEN 5000 AND 5999 AND
+		GENDER = 0
+
+	</select>
+
+	<select id="selectCountAnnualSalary5000W"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Sal_Annual BETWEEN 5000 AND 5999 AND
+		GENDER = 1
+
+	</select>
+
+	<select id="selectCountAnnualSalary6070M"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Sal_Annual BETWEEN 6000 AND 7999 AND
+		GENDER = 0
+
+	</select>
+
+	<select id="selectCountAnnualSalary6070W"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Sal_Annual BETWEEN 6000 AND 7999 AND
+		GENDER = 1
+
+	</select>
+
+
+
+	<select id="selectCountAnnualSalary8090M"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Sal_Annual BETWEEN 8000 AND 9999 AND
+		GENDER = 0
+
+	</select>
+
+	<update id="Manager_updateItem"
+		parameterType="study.spring.simplespring.model.User">
+		UPDATE user
+		SET member_lv=#{Member_Lv} ,
+		date_rest=#{Date_Rest}, managerid=#{ManagerId}
+		WHERE
+		MemberId=#{MemberId};
+	</update>
+
+	<select id="selectCountAnnualSalary8090W"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Sal_Annual BETWEEN 8000 AND 9999 AND
+		GENDER = 1
+
+	</select>
+
+	<select id="selectCountAnnualSalary10000M"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Sal_Annual >= 10000 AND GENDER = 0
+
+	</select>
+
+	<select id="selectCountAnnualSalary10000W"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Sal_Annual >= 10000 AND GENDER = 1
+	</select>
+
+	<!-- 연령대별 남녀 회원 수 -->
+	<select id="selectCountAge2024M"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE (YEAR(CURDATE()) - YEAR(BirthDate))
+		BETWEEN 20 AND 24
+		AND gender = 0
+	</select>
+
+	<select id="selectCountAge2024W"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE (YEAR(CURDATE()) - YEAR(BirthDate))
+		BETWEEN 20 AND 24
+		AND gender = 1
+	</select>
+
+	<select id="selectCountAge2529M"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE (YEAR(CURDATE()) - YEAR(BirthDate))
+		BETWEEN 25 AND 29
+		AND gender = 0
+	</select>
+
+	<select id="selectCountAge2529W"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE (YEAR(CURDATE()) - YEAR(BirthDate))
+		BETWEEN 25 AND 29
+		AND gender = 1
+	</select>
+
+	<select id="selectCountAge3034M"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE (YEAR(CURDATE()) - YEAR(BirthDate))
+		BETWEEN 30 AND 34
+		AND gender = 0
+	</select>
+
+	<select id="selectCountAge3034W"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE (YEAR(CURDATE()) - YEAR(BirthDate))
+		BETWEEN 30 AND 34
+		AND gender = 1
+	</select>
+
+	<select id="selectCountAge3539M"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE (YEAR(CURDATE()) - YEAR(BirthDate))
+		BETWEEN 35 AND 39
+		AND gender = 0
+	</select>
+
+	<select id="selectCountAge3539W"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE (YEAR(CURDATE()) - YEAR(BirthDate))
+		BETWEEN 35 AND 39
+		AND gender = 1
+	</select>
+
+	<select id="selectCountAge4049M"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE (YEAR(CURDATE()) - YEAR(BirthDate))
+		BETWEEN 40 AND 49
+		AND gender = 0
+	</select>
+
+	<select id="selectCountAge4049W"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE (YEAR(CURDATE()) - YEAR(BirthDate))
+		BETWEEN 40 AND 49
+		AND gender = 1
+	</select>
+
+	<select id="selectCountAge50PlusM"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE (YEAR(CURDATE()) - YEAR(BirthDate)) >=
+		50
+		AND gender = 0
+	</select>
+
+	<select id="selectCountAge50PlusW"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE (YEAR(CURDATE()) - YEAR(BirthDate)) >=
+		50
+		AND gender = 1
+	</select>
+
+	<!-- 최종학력별 남녀 회원 수 -->
+	<select id="selectCountEduHighschoolM"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Edu_lv LIKE 'HighSchool'
+		AND gender = 0
+	</select>
+
+	<select id="selectCountEduHighschoolW"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Edu_lv LIKE 'HighSchool'
+		AND gender = 1
+	</select>
+
+	<select id="selectCountEduCollegeM"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Edu_lv LIKE 'College'
+		AND gender = 0
+	</select>
+
+	<select id="selectCountEduCollegeW"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Edu_lv LIKE 'College'
+		AND gender = 1
+	</select>
+
+	<select id="selectCountEduUniversityM"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Edu_lv LIKE 'University'
+		AND gender = 0
+	</select>
+
+	<select id="selectCountEduUniversityW"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Edu_lv LIKE 'University'
+		AND gender = 1
+	</select>
+
+	<select id="selectCountEduGraduateSchoolM"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Edu_lv LIKE 'GraduateSchool'
+		AND gender
+		= 0
+	</select>
+
+	<select id="selectCountEduGraduateSchoolW"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Edu_lv LIKE 'GraduateSchool'
+		AND gender
+		= 1
+	</select>
+
+	<select id="selectCountEduDoctoralM"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Edu_lv LIKE 'Doctoral'
+		AND gender = 0
+	</select>
+
+	<select id="selectCountEduDoctoralW"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Edu_lv LIKE 'Doctoral'
+		AND gender = 1
+	</select>
+
+
+	<update id="reqMatch_updateUser"
+		parameterType="study.spring.simplespring.model.User">
+		UPDATE connect5.user SET isSpUser = 1 WHERE MemberId =
+		#{MemberId}
+	</update>
+
+	<select id="idealtypeList"
+		parameterType="study.spring.simplespring.model.User"
+		resultMap="userMap">
+		SELECT
+		UserName,
+		Gender,IsMarried, Date_Loc, Height,
+		Style,
+		Personality, BldType, Sal_Annual
+		FROM User
+		WHERE
+		Gender=#{Gender}
+		AND
+		IsMarried=#{IsMarried} AND
+		Date_Loc=#{Date_Loc} AND Height=#{Height}
+		AND Style=#{Style} AND
+		Personality=#{Personality} AND
+		BldType=#{BldType} AND
+		Sal_Annual=#{Sal_Annual}
+	</select>
+
+
+	<select id="CountM_Member_lvN"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Member_Lv LIKE 0
+		AND gender = 0
+	</select>
+
+	<select id="CountM_Member_lvB"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Member_Lv LIKE 1
+		AND gender = 0
+	</select>
+
+	<select id="CountM_Member_lvS"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Member_Lv LIKE 2
+		AND gender = 0
+	</select>
+
+	<select id="CountM_Member_lvG"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Member_Lv LIKE 3
+		AND gender = 0
+	</select>
+
+	<select id="CountM_Member_lvV"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Member_Lv LIKE 4
+		AND gender = 0
+	</select>
+
+	<select id="CountW_Member_lvN"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Member_Lv LIKE 0
+		AND gender = 1
+	</select>
+
+	<select id="CountW_Member_lvB"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Member_Lv LIKE 1
+		AND gender = 1
+	</select>
+
+	<select id="CountW_Member_lvS"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Member_Lv LIKE 2
+		AND gender = 1
+	</select>
+
+	<select id="CountW_Member_lvG"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Member_Lv LIKE 3
+		AND gender = 1
+	</select>
+
+	<select id="CountW_Member_lvV"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+
+		SELECT COUNT(*) FROM User
+		WHERE Member_Lv LIKE 4
+		AND gender = 1
+	</select>
+
+	<select id="MCountAll"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+		SELECT COUNT(*)
+		FROM User WHERE Gender = 0
+
+	</select>
+
+	<select id="WCountAll"
+		parameterType="study.spring.simplespring.model.User" resultType="int">
+		SELECT COUNT(*)
+		FROM User WHERE Gender = 1
+
+	</select>
+
+	<update id="updateItemRest"
+		parameterType="study.spring.simplespring.model.User">
+		UPDATE connect5.user SET Date_Rest = Date_Rest - 1 WHERE MemberId =
+		#{MemberId}
+	</update>
+
+	<update id="updateItemRestUp"
+		parameterType="study.spring.simplespring.model.User">
+		UPDATE connect5.user SET Date_Rest = Date_Rest + 1 WHERE MemberId =
+		#{MemberId}
+	</update>
+
+	<update id="reqSpService_updateUser"
+		parameterType="study.spring.simplespring.model.User">
+		UPDATE connect5.user SET ReqSpService = 1 WHERE MemberId = #{MemberId}
+	</update>
+
+	<update id="reqMatch_isSpUserupdateUser"
+		parameterType="study.spring.simplespring.model.User">
+		UPDATE connect5.user SET isSpUser = 0 WHERE MemberId =
+		#{MemberId}
+	</update>
+
+		<update id="updateItemSucMatch"
+		parameterType="study.spring.simplespring.model.User">
+		Update connect5.User SET Date_Rest = Date_Rest -1 WHERE MemberId = #{MemberId}
+	</update>
+	
+	<update id="updateDate_Rest"
+		parameterType="study.spring.simplespring.model.User">
+		UPDATE connect5.user SET Date_Rest = Date_Rest - 3 WHERE MemberId = #{MemberId}
+	</update>
+	
+</mapper>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ReqMatchMapper">
+
+	<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+	<resultMap id="ReqMatchMap"
+		type="study.spring.simplespring.model.ReqMatch">
+		<result property="ReqMatchId" column="ReqMatchId" />
+		<result property="Select_Date" column="Select_Date" />
+		<result property="MemberId" column="MemberId" />
+		<result property="Choose_Date" column="Choose_Date" />
+		<result property="start" column="start" />
+		<result property="Gender" column="Gender" />
+		<result property="title" column="title" />
+		<result property="UserName" column="UserName" />
+		<result property="ReqSpService" column="ReqSpService" />
+	</resultMap>
+
+
+	<!-- 단일행 조회를 위한 기능 정의 -->
+	<select id="selectItem"
+		parameterType="study.spring.simplespring.model.ReqMatch"
+		resultMap="ReqMatchMap">
+		SELECT r.MemberId,DATE_FORMAT(Select_Date,'%Y-%m-%d') AS Select_Date,
+		r.ReqMatchId,DATE_FORMAT(start,'%Y-%m-%d') AS start,
+		u.UserName FROM connect5.reqmatch r
+		Inner join connect5.user u ON (u.MemberId = r.MemberId) AND r.MemberId = #{MemberId}
+		
+	</select>
+	
+	<select id="selectItemModal1"
+		parameterType="study.spring.simplespring.model.ReqMatch"
+		resultMap="ReqMatchMap">
+		SELECT DATE_FORMAT(start,'%Y-%m-%d') AS start
+		FROM connect5.reqmatch r
+		Inner join connect5.user u ON (u.MemberId = r.MemberId) AND r.start = #{start}
+		
+	</select>
+
+	<!-- 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList"
+		parameterType="study.spring.simplespring.model.ReqMatch"
+		resultMap="ReqMatchMap">
+		SELECT r.MemberId,DATE_FORMAT(Select_Date,'%Y-%m-%d') AS Select_Date,
+		r.ReqMatchId,DATE_FORMAT(start,'%Y-%m-%d') AS start, u.UserName,u.MemberId,u.isSpUser FROM ReqMatch r
+		INNER JOIN User u ON (r.MemberId = u.MemberId)
+
+		<where>
+			<if test="UserName != null and UserName != ''">
+				u.UserName LIKE concat('%', #{UserName}, '%')
+			</if>
+		</where>
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount}
+		</if>
+	</select>
+	
+	<select id="selectList1"
+		parameterType="study.spring.simplespring.model.ReqMatch"
+		resultMap="ReqMatchMap">
+		SELECT r.MemberId,DATE_FORMAT(Select_Date,'%Y-%m-%d') AS Select_Date,
+		r.ReqMatchId,DATE_FORMAT(start,'%Y-%m-%d') AS start, u.UserName FROM ReqMatch r
+		INNER JOIN User u ON (r.MemberId = u.MemberId)
+		AND u.Member_lv = 1
+	</select>
+	
+	<select id="selectList1_1"
+		parameterType="study.spring.simplespring.model.ReqMatch"
+		resultMap="ReqMatchMap">
+		SELECT r.MemberId,DATE_FORMAT(Select_Date,'%Y-%m-%d') AS Select_Date,
+		r.ReqMatchId,DATE_FORMAT(start,'%Y-%m-%d') AS start, u.UserName FROM ReqMatch r
+		INNER JOIN User u ON (r.MemberId = u.MemberId)
+		AND (u.Member_lv = 1 OR u.Member_lv = 2) 
+	</select>
+	
+	<select id="selectList2"
+		parameterType="study.spring.simplespring.model.ReqMatch"
+		resultMap="ReqMatchMap">
+		SELECT r.MemberId,DATE_FORMAT(Select_Date,'%Y-%m-%d') AS Select_Date,
+		r.ReqMatchId,DATE_FORMAT(start,'%Y-%m-%d') AS start, u.UserName FROM ReqMatch r
+		INNER JOIN User u ON (r.MemberId = u.MemberId)
+		AND u.Member_lv = 2
+	</select>
+	
+	<select id="selectList2_1"
+		parameterType="study.spring.simplespring.model.ReqMatch"
+		resultMap="ReqMatchMap">
+		SELECT r.MemberId,DATE_FORMAT(Select_Date,'%Y-%m-%d') AS Select_Date,
+		r.ReqMatchId,DATE_FORMAT(start,'%Y-%m-%d') AS start, u.UserName FROM ReqMatch r
+		INNER JOIN User u ON (r.MemberId = u.MemberId)
+		AND (u.Member_lv = 2 OR u.Member_lv = 3) 
+	</select>
+	
+	<select id="selectList3"
+		parameterType="study.spring.simplespring.model.ReqMatch"
+		resultMap="ReqMatchMap">
+		SELECT r.MemberId,DATE_FORMAT(Select_Date,'%Y-%m-%d') AS Select_Date,
+		r.ReqMatchId,DATE_FORMAT(start,'%Y-%m-%d') AS start, u.UserName FROM ReqMatch r
+		INNER JOIN User u ON (r.MemberId = u.MemberId)
+		AND u.Member_lv = 3
+	</select>
+	
+	<select id="selectList3_1"
+		parameterType="study.spring.simplespring.model.ReqMatch"
+		resultMap="ReqMatchMap">
+		SELECT r.MemberId,DATE_FORMAT(Select_Date,'%Y-%m-%d') AS Select_Date,
+		r.ReqMatchId,DATE_FORMAT(start,'%Y-%m-%d') AS start, u.UserName FROM ReqMatch r
+		INNER JOIN User u ON (r.MemberId = u.MemberId)
+		AND (u.Member_lv = 3 OR u.Member_lv = 4) 
+	</select>
+	
+	<select id="selectList4"
+		parameterType="study.spring.simplespring.model.ReqMatch"
+		resultMap="ReqMatchMap">
+		SELECT r.MemberId,DATE_FORMAT(Select_Date,'%Y-%m-%d') AS Select_Date,
+		r.ReqMatchId,DATE_FORMAT(start,'%Y-%m-%d') AS start, u.UserName FROM ReqMatch r
+		INNER JOIN User u ON (r.MemberId = u.MemberId)
+		AND u.Member_lv = 4
+	</select>
+	
+
+	<!-- 데이터 저장을 위한 기능 정의 -->
+	<insert id="insertItem"
+		parameterType="study.spring.simplespring.model.ReqMatch"
+		useGeneratedKeys="true" keyProperty="ReqMatchId">
+		insert Into connect5.ReqMatch (Select_Date, MemberId , start, ReqSpService)
+		VALUES ( 
+		now(),#{MemberId},#{start},0
+		)
+	</insert>
+
+	<!-- 데이터 삭제를 위한 기능 정의 -->
+	<delete id="deleteItem"
+		parameterType="study.spring.simplespring.model.ReqMatch">
+		DELETE FROM ReqMatch WHERE ReqMatchId=#{ReqMatchId}
+	</delete>
+
+	<!-- 데이터 갱신을 위한 기능 정의 -->
+	<update id="updateReqSpService"
+		parameterType="study.spring.simplespring.model.ReqMatch">
+		 UPDATE ReqMatch SET ReqSpService = 1 WHERE MemberId = #{MemberId}
+	</update>
+
+	<!-- 조건에 맞는 데이터 수를 집계하여 int 타입으로 반환한다. count, max, min, sum, avg 함수를 사용한 
+		경우 Mapper에서는 resultMap이 아닌 resultType으로 반환한다. -->
+	<select id="selectCountAll"
+		parameterType="study.spring.simplespring.model.ReqMatch"
+		resultType="int">
+		SELECT COUNT(*) FROM ReqMatch
+	</select>
+
+</mapper>

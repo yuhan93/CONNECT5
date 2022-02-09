@@ -1,0 +1,45 @@
+@charset "EUC-KR";
+.table {
+	width: 800px;
+}
+
+#textarea {
+	width: 600px;
+}
+
+#textarea1 {
+	width: 200px;
+}
+
+#textarea2 {
+	width: 200px;
+}
+
+#contentarea {
+	height: 100px;
+}
+
+#name {
+	width: 100px;
+}
+
+#name1 {
+	width: 100px;
+}
+
+#num {
+	width: 130px;
+}
+
+.table-responsive #num {
+	width: 90px;
+}
+
+.thead1 {
+	display: inline-block;
+}
+
+.b1 {
+text-align: center;
+font-weight: 600;
+}

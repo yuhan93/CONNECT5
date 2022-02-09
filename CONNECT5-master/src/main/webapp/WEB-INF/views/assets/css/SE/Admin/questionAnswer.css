@@ -1,0 +1,88 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+	color: #222;
+}
+
+ul, ol {
+	list-style: none;
+}
+
+/* 전체 박스 크기*/
+.container {
+	height: 800px;
+}
+
+/* 로그인 박스 위치 */
+.top_login {
+	padding-top: 70px;
+}
+
+/* 왼쪽 사이드 바 */
+.sidebar1 {
+	padding-top: 80px;
+	height: 500px;
+}
+
+/* 로그인 버튼 위치 */
+.top_login>.btn {
+	float: right;
+	margin-left: 30px;
+	display: inline;
+}
+
+/* 게시판 관리 글씨 위치 */
+.middle {
+	height: 50px;
+}
+
+/* 게시판 크기 */
+.text_box {
+	height: 500px;
+	margin-top: 30px;
+}
+
+#connect {
+	float: right;
+}
+
+#s_btn {
+	width: 55px;
+}
+
+#title {
+	width: 80px;
+	background-color: #EAEAEA;
+}
+
+#title_text {
+	width: 200px;
+}
+
+#userid {
+	width: 80px;
+}
+
+#date {
+	width: 80px;
+}
+
+#context {
+	height: 400px;
+}
+
+#textarea {
+	width: 500px;
+	border: 0;
+}
+
+#contentarea {
+	height: 400px;
+	border: 0;
+}

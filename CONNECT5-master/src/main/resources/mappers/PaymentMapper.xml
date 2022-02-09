@@ -1,0 +1,80 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PaymentMapper">
+	<resultMap id="PaymentMap" type="study.spring.simplespring.model.Payment">
+		<result property="paymentid"	column="paymentid" />
+		<result property="servicetype"		column="servicetype" />
+		<result property="pmttype"	column="pmttype" />
+		<result property="servicebank"	column="servicebank" />
+		<result property="payername"		column="payername" />
+		<result property="card"	column="card" />
+		<result property="pmtplan"		column="pmtplan" />
+		<result property="memberid"	column="memberid" />
+		<result property="username"	column="username" />
+		<result property="datetime" column="datetime" />
+		<result property="member_lv" column="member_lv" />
+		<result property="managerid" column="managerid" />
+		<result property="clear" column="clear" />
+		
+
+	</resultMap>
+	
+	<select id="selectItem"
+		parameterType="study.spring.simplespring.model.Payment"
+		resultMap="PaymentMap">
+		SELECT paymentid, username, pmttype, servicetype,member_lv 
+		from payment INNER JOIN user ON payment.memberid = user.memberid
+		
+	</select>
+	
+	  <!-- 다중행 조회를 위한 기능 정의 -->
+    <select id="selectList"
+        parameterType="study.spring.simplespring.model.Payment"
+        resultMap="PaymentMap">
+        SELECT paymentid, user.username, user.memberid , pmttype,DATE_FORMAT(datetime, "%Y-%m-%d") as datetime ,servicetype,user.member_lv , clear
+		from payment INNER JOIN user ON payment.memberid = user.memberid 
+        
+        <where>
+            <if test="username != null and username != ''">
+                dname LIKE concat('%', #{dname}, '%')
+            </if>
+            
+        </where>
+        
+        ORDER BY paymentid DESC
+        
+        <if test="listCount > 0">
+           LIMIT #{offset}, #{listCount}
+        </if>
+    </select>
+	
+	<select id="selectCountAll"
+		parameterType="study.spring.simplespring.model.Payment" resultType="int">
+		SELECT COUNT(*)
+		FROM Payment p
+		INNER JOIN department d ON p.deptno = d.deptno
+		
+		<where>
+			<if test="name != null and name != ''">
+				name LIKE concat('%', #{name}, '%')
+			</if>
+		</where>
+	
+	</select>
+	
+	<insert id="insertItem"
+		parameterType="study.spring.simplespring.model.Payment"
+		useGeneratedKeys = "true"
+		keyProperty="paymentid">
+		INSERT INTO Payment (servicetype, pmttype, servicebank, payername, card, pmtplan, memberid,datetime)
+		 VALUES (#{servicetype},  #{pmttype}, #{servicebank}, #{payername}, #{card}, #{pmtplan}, #{memberid},now())
+	</insert>
+	
+	<update id="updateItem"
+		parameterType="study.spring.simplespring.model.User">
+		UPDATE payment
+		SET clear=1 
+		where MemberId=#{MemberId};
+	</update>
+
+</mapper>

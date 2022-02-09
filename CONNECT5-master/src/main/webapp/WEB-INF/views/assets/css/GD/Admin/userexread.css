@@ -1,0 +1,103 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+/* 모든 링크의 밑줄 제거
+      ------------------------------------*/
+a {
+	text-decoration: none;
+	color: #222;
+}
+
+/* 모든 목록정의 초기화. -여백은 6,7라인에서 제거했으므로 생략
+      ------------------------------------*/
+ul, ol {
+	list-style: none;
+}
+
+/* 전체 박스 크기*/
+.container {
+	height: 2000px;
+}
+
+/* 로그인 박스 위치 */
+.top_login {
+	padding-top: 70px;
+}
+
+/* 왼쪽 사이드 바 */
+.sidebar1 {
+	padding-top: 80px;
+	height: 500px;
+}
+
+/* 로그인 버튼 위치 */
+.top_login>#connect {
+	float: right;
+}
+
+/* 게시판 관리 글씨 위치 */
+.middle {
+	height: 50px;
+}
+
+/* 공지사항 / 연-결 성혼스토리 / 연결 Q&A / 연-결 만남 후기 박스 크기 */
+.middle_box {
+	height: 200px;
+	border-style: solid;
+	margin-top: 30px;
+}
+
+/* 공지사항 / 연-결 성혼스토리 / 연결 Q&A / 연-결 만남 후기 버튼 위치 및 색상 */
+.middle_box>.btn {
+	margin-top: 70px;
+	width: 130px;
+	margin-left: 80px;
+}
+
+/* 게시판 크기 */
+.text_box {
+	height: 500px;
+	padding-top: 20px;
+}
+
+.text_box>.pagination {
+	padding-left: 380px;
+}
+
+#contentarea {
+	height: 300px;
+}
+
+.write {
+	float: left;
+}
+
+.text_box>.btn {
+	float: right;
+}
+
+#date {
+	width: 100px;
+}
+
+#text_read {
+	padding-top: 30px;
+	padding-left: 50px;
+	padding-right: 50px;
+}
+
+#name {
+	width: 80px;
+}
+
+.table-responsive #num {
+	width: 90px;
+}
+
+.date {
+	width: 125px;
+	

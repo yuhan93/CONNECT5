@@ -1,0 +1,103 @@
+@charset "UTF-8";
+
+#level {
+		font-size:20px;
+		size:20px;
+		height: auto;
+		float: left;
+		padding-left:20px;
+	}
+	
+	#cc{
+		color:white;
+	}
+	
+	a{
+		color:black;
+	}
+	
+	#lv{
+		color:white;
+	}
+	
+	#lev{
+		background-color:#F73478;
+	}
+	
+	#back{
+	
+	background-image: url(/assets/img/bg.PNG);
+	}
+	
+	
+	.my_state{font-size: 20px; }
+	.state_matching, .request_date{margin:20px;}
+	.my_manager{
+		border:1px solid; padding:10px; width:650px;
+		float: left;
+
+	}
+	
+	#img{
+		vertical-align: middle;
+	}
+	.mg_name{
+		font-size:25px; color:brown;
+	}
+	
+	#p_box{
+		
+		color:white;
+	}
+	.name{
+		font-size:25px; color:brown;
+	}
+	.job{
+		font-size:10px; color:gray;
+	}
+
+	table{
+		width: 150px;
+	}
+	#my_name{
+		font-size: 30px; color: darkgray; 
+	}
+	
+	hr{
+	 color:#F73478;
+	}
+	
+	#lf_partner{
+		color:skyblue;
+	}
+	#my_level{
+		font-size:20px;
+		color:brown;
+		size:30px;
+		width:300px;
+		height: auto;
+		padding-left:20px;
+	}
+	
+	#level_text{
+		size:30px;
+		color:brown;
+	}
+	
+	
+	#n{
+		
+		font-size:17px;
+		color:#F73478;
+	
+	}
+	
+	#c{
+		font-size:16px;
+	}
+	
+	#partner {
+	width: 400px;
+	margin-left: 220px;
+}
+	

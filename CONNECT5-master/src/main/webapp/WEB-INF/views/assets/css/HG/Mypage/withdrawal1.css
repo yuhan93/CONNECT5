@@ -1,0 +1,21 @@
+@charset "EUC-KR";
+hr {
+         color: red;
+         border-color: red;
+         text-align: center;
+      }
+	.user_name, .user_pw {
+			font-size:20px;
+		}
+	fieldset{
+			padding: 30px;
+
+		}
+p {
+display: inline-block;
+}
+
+.buttom {
+text-align:center;
+width: 320px;
+}

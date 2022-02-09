@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+/* 추가 CSS 작성란 */
+	#show_id{
+			font-size: 20px;
+			padding: 20px;
+			margin-left: 150px;
+		}
+		
+		#btn{
+			margin-left: 260px;
+		}
+

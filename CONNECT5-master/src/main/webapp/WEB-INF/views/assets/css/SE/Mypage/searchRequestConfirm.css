@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+#propose {
+	width: 600px;
+	margin: auto;
+}
+
+#title {
+	width: 100px;
+	text-align: center;
+	background-color: #FFE1E6;
+}
+
+#context {
+	text-align: center;
+}
+
+.col-md-9 {
+	padding-top: 15px;
+	padding-left: 80px;
+}
+
+#info {
+	height: 50px;
+}
+
+#info th {
+	text-align: center;
+	background-color: #FFE1E6;
+}
+
+#info td {
+	text-align: center;
+}
+
+.content{
+	text-align: center;
+}
+
+.pull-right{
+	margin-right:80px;
+}

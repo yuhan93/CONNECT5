@@ -1,0 +1,916 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BoardMapper">
+	<resultMap id="boardMap"
+		type="study.spring.simplespring.model.Board">
+		<result property="BoardId" column="BoardId" />
+		<result property="Title" column="Title" />
+		<result property="Content" column="Content" />
+		<result property="CreationDate" column="CreationDate" />
+		<result property="ContentImg" column="ContentImg" />
+		<result property="Category" column="Category" />
+		<result property="MemberId" column="MemberId" />
+		<result property="UserId" column="UserId" />
+		<result property="UserName" column="UserName" />
+		<result property="viewcount" column="viewcount" />
+	</resultMap>
+
+
+	<select id="selectItem"
+		parameterType="study.spring.simplespring.model.Board"
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS CreationDate,
+		ContentImg,
+		Category, b.MemberId, u.UserId
+		FROM Board b
+		INNER JOIN User u ON
+		b.MemberId = u.MemberId
+		WHERE BoardId=#{BoardId}
+	</select>
+	
+	
+	
+	
+	
+
+	<!-- 다중행 조회를 위한 기능 정의 -->
+	<select id="selectListStory"
+		parameterType="study.spring.simplespring.model.Board"
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS
+		CreationDate,
+		ContentImg, Category, b.MemberId, u.UserId,u.UserName
+		FROM Board b
+		INNER JOIN User u ON
+		b.MemberId = u.MemberId
+		WHERE Category=1
+
+		<choose>
+			<when test="Title != null and Title != ''">
+				AND Title LIKE concat('%', #{Title}, '%')
+			</when>
+			<when test="UserName != null and UserName != ''">
+			AND UserName LIKE concat('%', #{UserName}, '%')
+			</when>
+		</choose>
+
+		ORDER BY BoardId DESC
+
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount}
+		</if>
+	</select>
+
+	<select id="selectItemTip"
+		parameterType="study.spring.simplespring.model.Board"
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS CreationDate,
+		ContentImg,
+		Category
+		FROM Board
+		WHERE BoardId=#{BoardId}
+	</select>
+	
+
+	<select id="selectItemadminReview"
+		parameterType="study.spring.simplespring.model.Board"
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS CreationDate,
+		ContentImg,
+		Category
+		FROM Board
+		WHERE BoardId=#{BoardId}
+	</select>
+	
+	
+	<select id="selectItemColumn"
+		parameterType="study.spring.simplespring.model.Board"
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS CreationDate,
+		ContentImg,
+		Category
+		FROM Board
+		WHERE BoardId=#{BoardId}
+	</select>
+
+	<select id="selectItemadminQnA"
+		parameterType="study.spring.simplespring.model.Board"
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS CreationDate,
+		ContentImg,
+		Category
+		FROM Board
+		WHERE BoardId=#{BoardId}
+	</select>
+
+	<select id="selectListNotice"
+		parameterType="study.spring.simplespring.model.Board"
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS
+		CreationDate,
+		ContentImg, Category, b.MemberId, u.UserId,u.UserName
+		FROM Board b
+		INNER JOIN User u ON
+		b.MemberId = u.MemberId
+		WHERE Category=2
+
+		<choose>
+			<when test="Title != null and Title != ''">
+				AND Title LIKE concat('%', #{Title}, '%')
+			</when>
+			<when test="UserName != null and UserName != ''">
+			AND UserName LIKE concat('%', #{UserName}, '%')
+			</when>
+		</choose>
+
+		ORDER BY BoardId DESC
+
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount}
+		</if>
+	</select>
+
+	<select id="selectListReview"
+		parameterType="study.spring.simplespring.model.Board"
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS
+		CreationDate,
+		ContentImg, Category,viewcount, b.MemberId, u.UserId,u.UserName
+		FROM Board b
+		INNER JOIN User u ON
+		b.MemberId = u.MemberId
+		WHERE Category=3
+
+		<choose>
+			<when test="Title != null and Title != ''">
+				AND Title LIKE concat('%', #{Title}, '%')
+			</when>
+			<when test="UserName != null and UserName != ''">
+			AND UserName LIKE concat('%', #{UserName}, '%')
+			</when>
+		</choose>
+		ORDER BY BoardId DESC
+
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount}
+		</if>
+	</select>
+	<select id="selectListadminQnA"
+		parameterType="study.spring.simplespring.model.Board"
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS
+		CreationDate,
+		ContentImg, Category, viewcount,b.MemberId, u.UserId,u.UserName
+		FROM Board b
+		INNER JOIN User u ON
+		b.MemberId = u.MemberId
+		WHERE Category=4
+
+		<choose>
+			<when test="Title != null and Title != ''">
+				AND Title LIKE concat('%', #{Title}, '%')
+			</when>
+			<when test="UserName != null and UserName != ''">
+			AND UserName LIKE concat('%', #{UserName}, '%')
+			</when>
+		</choose>
+
+		ORDER BY BoardId DESC
+
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount}
+		</if>
+	</select>
+	
+
+
+	<select id="selectListQnA"
+		parameterType="study.spring.simplespring.model.Board"
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS
+		CreationDate,
+		ContentImg, Category, b.MemberId, u.UserId, u.UserName
+		FROM Board b
+		INNER JOIN User u ON
+		b.MemberId = u.MemberId
+		WHERE Category=4
+
+		<choose>
+			<when test="Title != null and Title != ''">
+				AND Title LIKE concat('%', #{Title}, '%')
+			</when>
+			<when test="UserName != null and UserName != ''">
+			AND UserName LIKE concat('%', #{UserName}, '%')
+			</when>
+		</choose>
+
+		ORDER BY BoardId DESC
+
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount}
+		</if>
+	</select>
+
+	<select id="selectListTip"
+		parameterType="study.spring.simplespring.model.Board"
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS
+		CreationDate,
+		ContentImg, Category
+		FROM Board
+		WHERE Category=5
+
+		<choose>
+			<when test="Title != null and Title != ''">
+				AND Title = #{Title}
+			</when>
+		</choose>
+
+		ORDER BY BoardId DESC
+
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount}
+		</if>
+	</select>
+
+	<select id="selectListColumn"
+		parameterType="study.spring.simplespring.model.Board"
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS
+		CreationDate,
+		ContentImg, Category
+		FROM Board
+		WHERE Category=6
+
+		<choose>
+			<when test="Title != null and Title != ''">
+				AND Title = #{Title}
+			</when>
+		</choose>
+
+		ORDER BY BoardId DESC
+
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount}
+		</if>
+	</select>
+
+
+	<!-- 데이터 수 조회를 위한 기능 정의 -->
+	<select id="selectCountAll"
+		parameterType="study.spring.simplespring.model.Board" resultType="int">
+		SELECT COUNT(*)
+		FROM Board b
+		INNER JOIN User u ON b.MemberId=u.MemberId
+
+		<choose>
+			<when test="Title != null and Title != ''">
+				AND Title = #{Title}
+			</when>
+		</choose>
+	</select>
+
+	<select id="selectCountAlladminQnA"
+		parameterType="study.spring.simplespring.model.Board" resultType="int">
+		SELECT COUNT(*)
+		FROM Board b
+		INNER JOIN User u ON b.MemberId=u.MemberId
+		AND Category = 4
+
+		<choose>
+            <when test="Title != null and Title != ''">
+                AND Title LIKE concat ('%', #{Title}, '%')
+            </when>
+            
+            <when test="UserName != null and UserName != ''">
+                AND UserName LIKE concat ('%', #{UserName}, '%')
+            </when>
+		</choose>
+	</select>
+
+	<select id="selectCountAllStory"
+		parameterType="study.spring.simplespring.model.Board" resultType="int">
+		SELECT COUNT(*)
+		FROM Board b
+		INNER JOIN User u ON b.MemberId=u.MemberId
+		WHERE Category=1
+
+		<choose>
+			<when test="Title != null and Title != ''">
+				AND Title = #{Title}
+			</when>
+		</choose>
+	</select>
+
+	<select id="selectCountAllNotice"
+		parameterType="study.spring.simplespring.model.Board" resultType="int">
+		SELECT COUNT(*)
+		FROM Board b
+		INNER JOIN User u ON b.MemberId=u.MemberId
+		WHERE Category=2
+
+		<choose>
+			<when test="Title != null and Title != ''">
+				AND Title = #{Title}
+			</when>
+		</choose>
+	</select>
+
+	<select id="selectCountAllReview"
+		parameterType="study.spring.simplespring.model.Board" resultType="int">
+		SELECT COUNT(*)
+		FROM Board b
+		INNER JOIN User u ON b.MemberId=u.MemberId
+		WHERE Category=3
+
+		<choose>
+			<when test="Title != null and Title != ''">
+				AND Title = #{Title}
+			</when>
+		</choose>
+	</select>
+
+	<select id="selectCountAllQnA"
+		parameterType="study.spring.simplespring.model.Board" resultType="int">
+		SELECT COUNT(*)
+		FROM Board b
+		INNER JOIN User u ON b.MemberId=u.MemberId
+		WHERE Category=4
+
+		<choose>
+			<when test="Title != null and Title != ''">
+				AND Title = #{Title}
+			</when>
+		</choose>
+	</select>
+
+	<select id="selectCountTip"
+		parameterType="study.spring.simplespring.model.Board" resultType="int">
+		SELECT COUNT(*)
+		FROM Board
+		WHERE Category=5
+	</select>
+
+	<select id="selectCountColumn"
+		parameterType="study.spring.simplespring.model.Board" resultType="int">
+		SELECT COUNT(*)
+		FROM Board
+		WHERE Category=6
+	</select>
+
+
+	<!-- 데이터 저장을 위한 기능 정의 -->
+	<insert id="insertItemadminQnA"
+		parameterType="study.spring.simplespring.model.Board"
+		useGeneratedKeys="true" keyProperty="BoardId">
+		INSERT INTO Board (
+		Title, Content,
+		CreationDate, Category, MemberId,viewcount
+		) VALUES (
+		#{Title},
+		#{Content}, now(), 4, #{MemberId},#{viewcount}
+		)
+	</insert>
+	<insert id="insertItemadminReview"
+		parameterType="study.spring.simplespring.model.Board"
+		useGeneratedKeys="true" keyProperty="BoardId">
+		INSERT INTO Board (
+		Title, Content,
+		CreationDate, Category, MemberId,viewcount
+		)
+		VALUES (
+		#{Title},
+		#{Content}, now(), 1, #{MemberId},#{viewcount}
+		)
+	</insert>
+	<insert id="insertItemReview"
+		parameterType="study.spring.simplespring.model.Board"
+		useGeneratedKeys="true" keyProperty="BoardId">
+		INSERT INTO Board (
+		Title, Content,
+		CreationDate, ContentImg, Category, MemberId,viewcount
+		) VALUES (
+		#{Title},
+		#{Content}, now(), #{ContentImg}, 3, #{MemberId},0
+		)
+	</insert>
+	<insert id="insertItemTip"
+		parameterType="study.spring.simplespring.model.Board"
+		useGeneratedKeys="true" keyProperty="BoardId">
+		INSERT INTO Board (
+		Title, Content,
+		CreationDate, ContentImg, Category, MemberId
+		) VALUES (
+		#{Title},
+		#{Content}, now(), #{ContentImg}, 5, #{MemberId}
+		)
+	</insert>
+	<insert id="insertItemColumn"
+		parameterType="study.spring.simplespring.model.Board"
+		useGeneratedKeys="true" keyProperty="BoardId">
+		INSERT INTO Board (
+		Title, Content,
+		CreationDate, ContentImg, Category, MemberId
+		) VALUES (
+		#{Title},
+		#{Content}, now(), #{ContentImg}, 6, #{MemberId}
+		)
+	</insert>
+
+	<insert id="insertItemQnA"
+		parameterType="study.spring.simplespring.model.Board"
+		useGeneratedKeys="true" keyProperty="BoardId">
+		INSERT INTO Board (
+		Title, Content,
+		CreationDate, ContentImg, Category, MemberId,viewcount
+		) VALUES (
+		#{Title},
+		#{Content}, now(), #{ContentImg}, 4, #{MemberId},0
+		)
+
+
+	</insert>
+
+	<delete id="deleteItemTip"
+		parameterType="study.spring.simplespring.model.Board">
+		DELETE FROM Board WHERE BoardId=#{BoardId}
+	</delete>
+
+	<delete id="deleteItemColumn"
+		parameterType="study.spring.simplespring.model.Board">
+		DELETE FROM Board WHERE BoardId=#{BoardId}
+	</delete>
+
+	<!-- 데이터 삭제를 위한 기능 정의 -->
+	<delete id="deleteItem"
+		parameterType="study.spring.simplespring.model.Board">
+		DELETE FROM Board WHERE BoardId=#{BoardId}
+	</delete>
+
+	<!-- 데이터 갱신을 위한 기능 정의 -->
+	<update id="updateItem"
+		parameterType="study.spring.simplespring.model.Board">
+		UPDATE Board SET
+		Title=#{Title}, Content=#{Content},
+		CreationDate=#{CreationDate},
+		ContentImg=#{ContentImg},
+		Category=#{Category}, MemberId=#{MemberId}
+		WHERE BoardId=#{BoardId}
+	</update>
+
+	<select id="selectList"
+		parameterType="study.spring.simplespring.model.Board"
+		resultMap="boardMap">
+		SELECT b.*, u.UserName
+		FROM connect5.board b
+		inner JOIN
+		connect5.User u ON (b.MemberId =
+		u.MemberId) WHERE b.MemberId =
+		#{MemberId};
+	</select>
+
+
+	<insert id="insertItem1_1"
+		parameterType="study.spring.simplespring.model.Board"
+		useGeneratedKeys="true" keyProperty="BoardId">
+		INSERT INTO Board
+		(Title,Content,CreationDate,ContentImg,Category,MemberId)
+		VALUES
+		(#{Title},#{Content},now(),#{ContentImg},7,#{MemberId});
+	</insert>
+
+	<select id="selectList1_1"
+		parameterType="study.spring.simplespring.model.Board"
+		resultMap="boardMap">
+		SELECT b.BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS
+		CreationDate,
+		ContentImg, Category, u.UserName , r.Reply_Ok
+		FROM connect5.board b
+		inner JOIN connect5.User u ON (b.MemberId = u.MemberId) 
+        LEFT Join connect5.reply r ON (r.BoardId = b.BoardId)
+        WHERE b.MemberId = #{MemberId} AND Category = 7  
+	
+		ORDER BY BoardId DESC
+
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount}
+		</if>
+	</select>
+
+	<select id="selectItem1_1"
+		parameterType="study.spring.simplespring.model.Board"
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS CreationDate,
+		ContentImg,
+		Category
+		FROM connect5.board
+		WHERE BoardId=#{BoardId} AND Category = 7;
+	</select>
+
+	<update id="updateItem1_1"
+		parameterType="study.spring.simplespring.model.Board">
+		UPDATE Board SET
+		Title = #{Title},
+		Content=#{Content},CreationDate=#{CreationDate},ContentImg=#{ContentImg},
+		MemberId=#{MemberId},Category = 7
+		WHERE BoardId=#{BoardId}
+	</update>
+
+	<insert id="insertItemadminNotice"
+		parameterType="study.spring.simplespring.model.Board"
+		useGeneratedKeys="true" keyProperty="BoardId">
+		INSERT INTO Board
+		(Title,Content,CreationDate,ContentImg,Category,MemberId,viewcount)
+		VALUES
+		(#{Title},#{Content},now(),#{ContentImg},2,#{MemberId},#{viewcount});
+	</insert>
+
+	<select id="selectItemadminNotice"
+		parameterType="study.spring.simplespring.model.Board"
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS CreationDate,
+		ContentImg,
+		Category
+		FROM connect5.board
+		WHERE BoardId=#{BoardId} AND Category = 2;
+	</select>
+
+	<update id="editItemTip"
+		parameterType="study.spring.simplespring.model.Board">
+		UPDATE Board SET
+		Title = #{Title},
+		Content=#{Content},CreationDate=now(),ContentImg=#{ContentImg},
+		MemberId=#{MemberId},Category = 5
+		WHERE BoardId=#{BoardId}
+	</update>
+
+
+
+	<update id="editItemColumn"
+		parameterType="study.spring.simplespring.model.Board">
+		UPDATE Board SET
+		Title = #{Title},
+		Content=#{Content},CreationDate=now(),ContentImg=#{ContentImg},
+		MemberId=#{MemberId},Category = 6
+		WHERE BoardId=#{BoardId}
+	</update>
+
+
+	<update id="updateItemadminNotice"
+		parameterType="study.spring.simplespring.model.Board">
+		UPDATE Board SET
+		Title = #{Title},
+		Content=#{Content},CreationDate=now(),ContentImg=#{ContentImg},
+		MemberId=#{MemberId},Category = 2
+		WHERE BoardId=#{BoardId}
+	</update>
+
+	<delete id="deleteItemadminNotice"
+		parameterType="study.spring.simplespring.model.Board">
+		DELETE FROM Board WHERE BoardId=#{BoardId};
+	</delete>
+
+	<select id="selectListadminNotice"
+		parameterType="study.spring.simplespring.model.Board"
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS
+		CreationDate,
+		ContentImg, Category, viewcount,b.MemberId, u.UserId,
+		u.UserName
+		FROM Board b
+		INNER JOIN User u ON
+		b.MemberId = u.MemberId
+		WHERE Category
+		= 2
+
+		<choose>
+			<when test="Title != null and Title != ''">
+				AND Title LIKE concat('%', #{Title}, '%')
+			</when>
+			<when test="UserName != null and UserName != ''">
+			AND UserName LIKE concat('%', #{UserName}, '%')
+			</when>
+		</choose>
+
+		ORDER BY BoardId DESC
+
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount}
+		</if>
+	</select>
+
+	<select id="selectListadmin1_1"
+		parameterType="study.spring.simplespring.model.Board"
+		resultMap="boardMap">
+		SELECT b.BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS
+		CreationDate,
+		ContentImg, Category, u.isadmin,u.UserName, r.Reply_Ok
+		FROM
+		connect5.board b
+		INNER JOIN connect5.User u ON u.MemberId = b.MemberId
+        LEFT JOIN connect5.reply r ON b.BoardId = r.BoardId
+		WHERE u.isadmin = 0 AND Category=7
+
+		<choose>
+			<when test="Title != null and Title != ''">
+				AND Title LIKE concat('%', #{Title}, '%')
+			</when>
+
+			<when test="UserName != null and UserName != ''">
+				AND UserName LIKE concat('%', #{UserName}, '%')
+			</when>
+		</choose>
+
+		ORDER BY CreationDate DESC
+
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount}
+		</if>
+	</select>
+
+	<select id="selectItemadmin1_1"
+		parameterType="study.spring.simplespring.model.Board"
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS CreationDate,
+		ContentImg,
+		Category , u.UserName
+		FROM connect5.board b
+		INNER JOIN connect5.user u
+		ON b.MemberId = u.MemberId AND BoardId = #{BoardId} AND Category = 7
+	</select>
+
+
+	<update id="updateviewcount"
+		parameterType="study.spring.simplespring.model.Board">
+		UPDATE connect5.board SET viewcount = viewcount + 1
+		WHERE BoardId = #{BoardId}
+	</update>
+
+	<select id="selectPrevDocument"
+		parameterType="study.spring.simplespring.model.Board"
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS CreationDate,
+		ContentImg,
+		Category
+		FROM connect5.Board
+		WHERE BoardId &lt; #{BoardId} AND Category
+		= 2
+		ORDER BY BoardId DESC
+		LIMIT 0, 1
+	</select>
+
+	<!-- 다음글 정보를 조회한다. -->
+	<select id="selectNextDocument"
+		parameterType="study.spring.simplespring.model.Board"
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS CreationDate,
+		ContentImg,
+		Category
+		FROM connect5.Board
+		WHERE BoardId &gt; #{BoardId} AND Category
+		= 2
+		ORDER BY BoardId ASC
+		LIMIT 0, 1
+	</select>
+	
+	<select id="selectStoryPrevDocument" 
+		parameterType="study.spring.simplespring.model.Board" 
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS CreationDate,
+		ContentImg, Category
+		FROM connect5.Board
+		WHERE BoardId &lt; #{BoardId} AND Category = 1
+		ORDER BY BoardId DESC
+		LIMIT 0, 1
+	</select>
+	
+	<!-- 다음글 정보를 조회한다. -->
+	<select id="selectStoryNextDocument" 
+		parameterType="study.spring.simplespring.model.Board" 
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS CreationDate,
+		ContentImg, Category
+		FROM connect5.Board
+		WHERE BoardId &gt; #{BoardId} AND Category = 1
+		ORDER BY BoardId ASC
+		LIMIT 0, 1
+	</select>
+	
+	<select id="selectNoticePrevDocument" 
+		parameterType="study.spring.simplespring.model.Board" 
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS CreationDate,
+		ContentImg, Category
+		FROM connect5.Board
+		WHERE BoardId &lt; #{BoardId} AND Category = 2
+		ORDER BY BoardId DESC
+		LIMIT 0, 1
+	</select>
+	
+	<!-- 다음글 정보를 조회한다. -->
+	<select id="selectNoticeNextDocument" 
+		parameterType="study.spring.simplespring.model.Board" 
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS CreationDate,
+		ContentImg, Category
+		FROM connect5.Board
+		WHERE BoardId &gt; #{BoardId} AND Category = 2
+		ORDER BY BoardId ASC
+		LIMIT 0, 1
+	</select>
+	
+	<select id="selectReviewPrevDocument" 
+		parameterType="study.spring.simplespring.model.Board" 
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS CreationDate,
+		ContentImg, Category
+		FROM connect5.Board
+		WHERE BoardId &lt; #{BoardId} AND Category = 3
+		ORDER BY BoardId DESC
+		LIMIT 0, 1
+	</select>
+	
+	<!-- 다음글 정보를 조회한다. -->
+	<select id="selectReviewNextDocument" 
+		parameterType="study.spring.simplespring.model.Board" 
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS CreationDate,
+		ContentImg, Category
+		FROM connect5.Board
+		WHERE BoardId &gt; #{BoardId} AND Category = 3
+		ORDER BY BoardId ASC
+		LIMIT 0, 1
+	</select>
+	
+	<select id="selectQnAPrevDocument" 
+		parameterType="study.spring.simplespring.model.Board" 
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS CreationDate,
+		ContentImg, Category
+		FROM connect5.Board
+		WHERE BoardId &lt; #{BoardId} AND Category = 4
+		ORDER BY BoardId DESC
+		LIMIT 0, 1
+	</select>
+	
+	<!-- 다음글 정보를 조회한다. -->
+	<select id="selectQnANextDocument" 
+		parameterType="study.spring.simplespring.model.Board" 
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS CreationDate,
+		ContentImg, Category
+		FROM connect5.Board
+		WHERE BoardId &gt; #{BoardId} AND Category = 4
+		ORDER BY BoardId ASC
+		LIMIT 0, 1
+	</select>
+	
+	<!-- ================== Admin 성혼스토리 게시판 mapper 시작 ================ -->
+	<select id="selectListAdminStory"
+		parameterType="study.spring.simplespring.model.Board"
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS CreationDate,
+		ContentImg, Category, viewcount, b.MemberId, u.UserId, u.UserName
+		FROM connect5.Board b
+		INNER JOIN User u ON (b.MemberId = u.MemberId) 
+		AND Category = 1
+
+		<choose>
+			<when test="Title != null and Title != ''">
+				AND Title LIKE concat ('%', #{Title}, '%')
+			</when>
+			
+			<when test="UserName != null and UserName != ''">
+				AND UserName LIKE concat ('%', #{UserName}, '%')
+			</when>						
+		</choose>
+
+		ORDER BY BoardId DESC
+
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount}
+		</if>
+	</select>
+
+	<select id="selectCountAllAdminStory"
+		parameterType="study.spring.simplespring.model.Board" resultType="int">
+		SELECT count(*)
+		FROM connect5.Board b
+		INNER JOIN User u ON (b.MemberId = u.MemberId) 
+		AND Category = 1
+
+		<choose>
+			<when test="Title != null and Title != ''">
+				AND Title LIKE concat ('%', #{Title}, '%')
+			</when>
+			
+			<when test="UserName != null and UserName != ''">
+				AND UserName LIKE concat ('%', #{UserName}, '%')
+			</when>						
+		</choose>
+
+		ORDER BY BoardId DESC
+
+	</select>
+
+	<!-- 데이터 수 조회를 위한 기능 정의 -->
+	<select id="selectItemAdminStory"
+		parameterType="study.spring.simplespring.model.Board"
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS CreationDate,
+		ContentImg, Category
+		FROM connect5.board
+		WHERE BoardId=#{BoardId} AND Category = 1;
+	</select>
+	
+	<!-- 데이터 저장을 위한 기능 정의 -->
+	<insert id="insertItemAdminStory"
+		parameterType="study.spring.simplespring.model.Board"
+		useGeneratedKeys="true" keyProperty="BoardId">
+		INSERT INTO Board
+		(Title, Content, CreationDate, ContentImg, Category, MemberId, viewcount
+		) VALUES (
+		#{Title}, #{Content}, now(), #{ContentImg}, 1, #{MemberId}, #{viewcount});
+	</insert>
+ 
+    
+  	<update id="updateItemAdminStory"
+		parameterType="study.spring.simplespring.model.Board">
+		UPDATE Board SET
+		Title=#{Title}, Content=#{Content}, CreationDate=now(),
+		ContentImg=#{ContentImg}, Category=1, MemberId=#{MemberId}
+		WHERE BoardId=#{BoardId};
+	</update>	
+	
+	<delete id="deleteItemAdminStory"
+        parameterType="study.spring.simplespring.model.Board">
+        DELETE FROM Board WHERE BoardId=#{BoardId} AND Category=1;
+    </delete>
+    
+ 
+ 	<update id="updateviewcountAdminStory"
+		parameterType="study.spring.simplespring.model.Board">
+		UPDATE connect5.board SET viewcount = viewcount + 1
+		WHERE BoardId = #{BoardId} AND Category=1;
+	</update>
+
+	<!-- 이전글 정보를 조회한다. -->
+	<select id="selectPrevPageAdminStory"
+		parameterType="study.spring.simplespring.model.Board"
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS CreationDate,
+		ContentImg, Category
+		FROM connect5.Board
+		WHERE BoardId &lt; #{BoardId} AND Category=1
+		ORDER BY BoardId DESC
+		LIMIT 0, 1
+	</select>
+
+	<!-- 다음글 정보를 조회한다. -->
+	<select id="selectNextPageAdminStory"
+		parameterType="study.spring.simplespring.model.Board"
+		resultMap="boardMap">
+		SELECT BoardId, Title, Content,
+		DATE_FORMAT(CreationDate,'%Y-%m-%d') AS CreationDate,
+		ContentImg, Category
+		FROM connect5.Board
+		WHERE BoardId &gt; #{BoardId} AND Category=1
+		ORDER BY BoardId ASC
+		LIMIT 0, 1
+	</select>   
+    
+	<!-- ================== Admin 성혼스토리 게시판 mapper 끝 ================ -->
+	
+	
+</mapper>

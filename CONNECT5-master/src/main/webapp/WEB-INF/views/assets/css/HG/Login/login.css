@@ -1,0 +1,33 @@
+@charset "EUC-KR";
+hr {
+         color: red;
+         border-color: red;
+         text-align: center;
+      }
+      .center {
+         height: 550px;
+      }
+
+      .login4 {
+      position: absolute;
+      display: inline-block;
+     float:left;
+     font-size: 60px;
+     font-weight: 600;
+     top:50px;
+     left: 40px;
+      }
+      .content {
+     position: relative;
+      }
+      
+     
+      .buttom {
+        text-align:center;
+      }
+
+fieldset {
+ position: absolute;
+  top:70px;
+     left: 240px;
+}

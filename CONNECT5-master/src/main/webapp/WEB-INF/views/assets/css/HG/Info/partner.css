@@ -1,0 +1,34 @@
+@charset "EUC-KR";
+
+.photo {
+	margin: 35px auto;
+	height: 250px;
+	padding: 7px 7px 15px 7px;
+	border: 1px solid #bfbfbf;
+	background-color: #fff;
+	float: left;
+	text-align: center;
+}
+
+/** ÄÁÅÙÃ÷ ¹Ú½º > ÅØ½ºÆ® */
+.photo>p {
+	padding-top: 7px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 12px;
+	color: #060;
+}
+
+/** ÄÁÅÙÃ÷ ¹Ú½º > ÀÌ¹ÌÁö */
+.photo>img {
+	width: 200px;
+	height: 200px;
+}
+
+.box10 {
+	margin: 10px;
+	width: 250px;
+	height: 250px;
+	display: inline-block;
+	padding-left: 40px;
+}

@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+.content {
+	margin-top: 10px;
+}
+
+.content th {
+	text-align: right;
+	height: 30px;
+}
+
+.content td {
+	text-align: right;
+}
+
+#sun {
+	color: red;
+}
+
+#count {
+	text-align: left;
+}
+
+.modal-content {
+	width: 600px;
+}
+
+#modaltable1 {
+	width: 100%;
+	height: 100px;
+}
+
+#modaltable1 th {
+	text-align: center;
+}
+
+#modaltable1 td {
+	text-align: center;
+}
+
+.modal-footer {
+	border: 0;
+}
+
+select {
+	width: 100px;
+	height: 30px;
+}
+.pull-right > p{
+	padding-right:80px;
+}
+#addBtn{
+	margin-right:75px;
+}
+
+/** 이미지와 input요소간의 정렬 설정 */
+#calImg { vertical-align: middle; }
+input { vertical-align: middle; }

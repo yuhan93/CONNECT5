@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+
+.box {
+	width:1000px;
+	}
+		
+.box img {
+	width: 850px;
+	height: auto;
+	}
+	
+.box1 {
+	width: 1000px;
+	}
+	
+.box1 img {
+	width: 240px;
+	height: auto;;
+	}
+	
+	

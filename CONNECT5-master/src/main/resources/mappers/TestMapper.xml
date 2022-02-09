@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TestMapper">
+<resultMap id="testMap"
+type="study.spring.simplespring.model.Test">
+<result property="TestId" column="TestId" />
+<result property="TestQ1" column="TestQ1" />
+<result property="TestQ2" column="TestQ2" />
+<result property="TestQ3" column="TestQ3" />
+<result property="TestQ4" column="TestQ4" />
+<result property="ResultTitle" column="ResultTitle" />
+<result property="ResultContent" column="ResultContent" />
+</resultMap>
+
+<select id="selectList"
+parameterType="study.spring.simplespring.model.Test"
+resultMap="testMap">
+SELECT TestId, TestQ1, TestQ2, TestQ3, TestQ4, ResultTitle, ResultContent
+FROM Test
+WHERE TestQ3=#{TestQ3} AND TestQ4=#{TestQ4}
+</select>
+
+
+<select id="selectList1"
+parameterType="study.spring.simplespring.model.Test"
+resultMap="testMap">
+SELECT TestId, TestQ1, TestQ2, TestQ3, TestQ4, ResultTitle, ResultContent
+FROM Test
+WHERE TestQ1=#{TestQ1} AND TestQ2=#{TestQ2}
+</select>
+
+</mapper>

@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+.table tr, th {
+	text-align: center;
+}
+.table-responsive #num {
+	width: 65px;
+}
+.table-responsive #date {
+	width: 110px;
+}
+.search {
+	float: right;
+	padding-bottom: 10px;
+}
+
+hr {
+	text-align: center;
+}
+#btn {
+	width:55px;
+}
+.content{
+	text-align: center;	
+}

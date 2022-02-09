@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+.table th {
+	text-align: center;
+}
+
+.table-responsive #num {
+	width: 90px;
+}
+
+#date {
+	width: 100px;
+}
+
+.dropdown {
+	float: right;
+	padding-bottom: 10px;
+}
+
+#pagination {
+	width: 270px;
+	margin: auto;
+}
+
+#context {
+	height: 300px;
+}
+
+#Re_Content {
+	width: 770px;
+	display: inline;
+}
+
+#Re_Content1 {
+	width: 700px;
+	display: inline;
+}
+
+.media-body {
+	padding: 10px;
+	border: 1px solid #EAEAEA;
+}
+.content{
+	text-align: center;
+}

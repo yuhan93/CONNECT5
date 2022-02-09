@@ -1,0 +1,51 @@
+@charset "EUC-KR";
+
+.media {
+	height: 850px;
+}
+
+#test10 {
+	border-bottom: dotted 1px #BDBDBD;
+	height: 60px;
+}
+
+#test11 {
+	border-top: dotted 1px #BDBDBD;
+	border-bottom: dotted 1px #BDBDBD;
+	height: 60px;
+}
+
+.testimg img {
+	width: 110%;
+	height: 200px;
+}
+
+#title {
+	margin: auto;
+}
+
+.tabl {
+	margin: auto;
+}
+
+.b1 {
+	text-align: center;
+	font-size: 20px;
+}
+
+.modal-footer {
+	text-align: center;
+	border: 0;
+}
+
+.modal-body {
+	border: 0;
+}
+
+.modal-header {
+	border: 0;
+}
+
+.pagination {
+	padding-left: 480px;
+}

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SucMatchMapper">
+	<resultMap id="SucMatchMap"
+		type="study.spring.simplespring.model.SucMatch">
+		<result property="SucMatchId" column="SucMatchId" />
+		<result property="Status" column="Status" />
+		<result property="ReqMatchId" column="ReqMatchId" />
+		<result property="MemberId" column="MemberId" />
+		<result property="OtherMemberId" column="OtherMemberId" />
+	</resultMap>
+
+	<insert id="insertSucMatchItem"
+		parameterType="study.spring.simplespring.model.SucMatch"
+		useGeneratedKeys="true" keyProperty="SucMatchId">
+		INSERT INTO SucMatch (
+		SucMatchId,
+		Status, ReqMatchId, MemberId, OtherMemberId
+		)
+		VALUES (
+		#{SucMatchId},
+		#{Status}, #{ReqMatchId}, #{MemberId},#{OtherMemberId}
+		)
+	</insert>
+
+	<select id="selectItem"
+		parameterType="study.spring.simplespring.model.SucMatch"
+		resultMap="SucMatchMap">
+		SELECT * FROM sucmatch
+		Inner join user ON (user.MemberId =
+		sucmatch.otherMemberId) AND
+		sucmatch.otherMemberId = #{MemberId}
+
+	</select>
+	<select id="selectItem_memberId"
+		parameterType="study.spring.simplespring.model.SucMatch"
+		resultType="int">
+		SELECT MemberId FROM sucmatch
+		WHERE SucMatchId = #{SucMatchId}
+
+	</select>
+	<select id="selectItem_otherMemberId"
+		parameterType="study.spring.simplespring.model.SucMatch"
+		resultType="int">
+		SELECT OtherMemberId FROM sucmatch
+		WHERE SucMatchId = #{SucMatchId}
+
+	</select>
+	<select id="select1"
+		parameterType="study.spring.simplespring.model.SucMatch"
+		resultMap="SucMatchMap">
+		
+		select s.sucmatchid,s.status,s.reqmatchid, OtherMemberId ,s.memberid , u.memberid as myMemberId ,uu.memberid as partnerMemberId ,u.username as myUserName, uu.username as partnerUserName, u.mobile as myMobile, uu.mobile as partnerMobile, u.gender as myGender, uu.gender as partnerGender, u.job as myJob, uu.job as partnerJob , u.bldtype as myBld, uu.bldtype as partnerBld, u.date_loc as myLoc, uu.date_loc as partnerLoc, u.sal_annual as mySal, uu.sal_annual as partnerSal ,u.user_img as myImg, uu.user_img as partnerImg
+		,u.member_lv as myLv, uu.member_lv as partnerLv, u.stateaddress as mystate, uu.stateaddress as partnerstate, u.birthdate as myBirth, uu.birthdate as partnerBirth, u.ismarried as myMarry, uu.ismarried as partnerMarry from sucmatch as s join user as u on s.memberid = u.memberid join user as uu on 
+		OtherMemberId = uu.memberid where (s.OtherMemberId=#{MemberId} or s.MemberId=#{MemberId}) and status=2 
+
+	</select>
+	
+	<select id="select0"
+		parameterType="study.spring.simplespring.model.SucMatch"
+		resultMap="SucMatchMap">
+		SELECT s.SucMatchId,s.Status,
+		s.ReqMatchId,s.MemberId,
+		s.OtherMemberId, u.UserName FROM connect5.sucmatch s
+		INNER JOIN
+		connect5.user u ON (s.MemberId = u.MemberId) AND
+		s.OtherMemberId =
+		#{MemberId} and s.status = 0;
+
+	</select>
+
+	<select id="selectList"
+		parameterType="study.spring.simplespring.model.SucMatch"
+		resultMap="SucMatchMap">
+		SELECT s.SucMatchId,s.Status,
+		s.ReqMatchId,s.MemberId,
+		s.OtherMemberId, u.UserName FROM connect5.sucmatch s
+		INNER JOIN
+		connect5.user u ON (s.MemberId = u.MemberId) AND
+		s.OtherMemberId =
+		#{MemberId}
+		
+	</select>
+
+	<update id="updateItem"
+		parameterType="study.spring.simplespring.model.SucMatch">
+		UPDATE SucMatch SET
+		status = 2
+		WHERE
+		otherMemberId=#{MemberId} and SucMatchId=#{SucMatchId}
+	</update>
+
+	<update id="updateDisItem"
+		parameterType="study.spring.simplespring.model.SucMatch">
+		UPDATE SucMatch SET
+		status = 1
+		WHERE
+		(MemberId=#{MemberId} or otherMemberId=#{MemberId}) and SucMatchId=#{SucMatchId}
+	</update>
+	
+	<delete id="deleteItem"
+		parameterType="study.spring.simplespring.model.SucMatch">
+		DELETE FROM SucMatch WHERE SucMatchId=#{SucMatchId}
+	</delete>
+
+	<!-- ================== my연-결 매칭 기록 보기 mapper 시작 ================ -->
+	<select id="selectListExRecord"
+		parameterType="study.spring.simplespring.model.SucMatch"
+		resultMap="SucMatchMap">
+		SELECT s.SucMatchId, u.UserName, u.BirthDate, u.Height, u.Edu_Lv, u.Job
+		FROM connect5.SucMatch s
+        INNER JOIN connect5.user u ON (u.MemberId = s.othermemberId)
+		WHERE s.MemberId = #{MemberId} AND status = 2
+		
+		<choose>
+			<when test="UserName != null and UserName != ''">
+				AND UserName LIKE concat ('%', #{UserName}, '%')
+			</when>
+			
+			<when test="Job != null and Job != ''">
+				AND Job LIKE concat ('%', #{Job}, '%')
+			</when>
+		</choose>
+		
+		ORDER BY UserName ASC
+
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount}
+		</if>     
+	</select>
+	
+	<select id="selectCountAllExRecord"
+		parameterType="study.spring.simplespring.model.SucMatch" resultType="int">
+		SELECT count(*)
+		FROM connect5.SucMatch s
+        INNER JOIN connect5.user u ON (u.MemberId = s.othermemberId)
+        WHERE s.MemberId = #{MemberId} AND status = 2
+
+		<choose>
+			<when test="UserName != null and UserName != ''">
+				AND UserName LIKE concat ('%', #{UserName}, '%')
+			</when>
+			
+			<when test="Job != null and Job != ''">
+				AND Job LIKE concat ('%', #{Job}, '%')
+			</when>
+		</choose>
+		
+		ORDER BY UserName ASC
+	</select>
+
+	<!-- 데이터 수 조회를 위한 기능 정의 -->
+	<select id="selectItemExRecord"
+		parameterType="study.spring.simplespring.model.SucMatch"
+		resultMap="SucMatchMap">
+		SELECT *
+		FROM connect5.SucMatch s
+		INNER JOIN connect5.user u ON s.OtherMemberId = u.MemberId;
+	</select>
+	
+	<!-- 이전글 정보를 조회한다. -->
+	<select id="selectPrevPageExRecord"
+		parameterType="study.spring.simplespring.model.SucMatch"
+		resultMap="SucMatchMap">
+		SELECT s.SucMatchId, u.UserName, u.BirthDate, u.Height, u.Edu_Lv, u.Job
+		FROM connect5.SucMatch s
+        INNER JOIN connect5.user u ON (u.MemberId = s.othermemberId)
+        where u.MemberId &lt; #{MemberId} AND s.status=2
+		ORDER BY MemberId DESC
+		LIMIT 0, 1		
+	</select>
+
+	<!-- 다음글 정보를 조회한다. -->
+	<select id="selectNextPageExRecord"
+		parameterType="study.spring.simplespring.model.SucMatch"
+		resultMap="SucMatchMap">
+		SELECT s.SucMatchId, u.UserName, u.BirthDate, u.Height, u.Edu_Lv, u.Job
+		FROM connect5.SucMatch s
+        INNER JOIN connect5.user u ON (u.MemberId = s.othermemberId)
+        where u.MemberId &gt; #{MemberId} AND s.status=2 
+		ORDER BY MemberId ASC
+		LIMIT 0, 1
+	</select>   
+	<!-- ================== my연-결 매칭 기록 보기 mapper 끝 ================== -->
+	
+</mapper>

@@ -1,0 +1,49 @@
+@charset "EUC-KR";
+
+.box10 {
+	width: 800px;
+	margin: auto;
+}
+
+.buttom {
+	text-align: center;
+}
+
+.box14 {
+	padding-left: 10px;
+	border: 1px solid #bdbdbd;
+	width: 200px;
+	height: 35px;
+}
+
+.box13 {
+	background-color: #ffe1e6;
+	text-align: center;
+	border: 1px solid #bdbdbd;
+	
+	width: 150px;
+	height: 35px;
+}
+
+.box16 {
+	padding-left: 10px;
+	border: 1px solid #bdbdbd;
+	width: 250px;
+	height: 35px;
+}
+
+.box15 {
+	background-color: #ffe1e6;
+	text-align: center;
+	border: 1px solid #bdbdbd;
+	
+	width: 150px;
+	height: 35px;
+}
+
+.box17 {
+padding-left: 10px;
+	border: 1px solid #bdbdbd;
+	width: 800px;
+	height: 35px;
+}

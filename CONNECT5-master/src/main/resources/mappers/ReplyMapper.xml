@@ -1,0 +1,103 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ReplyMapper">
+	<resultMap id="replyMap"
+		type="study.spring.simplespring.model.Reply">
+		<result property="ReplyId" column="ReplyId" />
+		<result property="Re_Title" column="Re_Title" />
+		<result property="Re_Content" column="Re_Content" />
+		<result property="Re_CreationDate" column="Re_CreationDate" />
+		<result property="BoardId" column="BoardId" />
+		<result property="MemberId" column="MemberId" />
+		<result property="UserName" column="UserName" />
+		<result property="Reply_Ok" column="Reply_Ok" />
+	</resultMap>
+	
+	<select id="selectItem"
+		parameterType="study.spring.simplespring.model.Reply"
+		resultMap="replyMap">
+		SELECT ReplyId, Re_Title, Re_Content,
+		DATE_FORMAT(Re_CreationDate,'%Y-%m-%d') AS Re_CreationDate,
+		r.BoardId, r.MemberId, u.UserName
+		FROM Reply r
+		INNER JOIN User u ON r.MemberId = u.MemberId
+		INNER JOIN board b ON (r.BoardId = b.BoardId) AND r.BoardId = #{BoardId}
+		WHERE ReplyId=#{ReplyId}
+	</select>
+	
+	<!-- 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList"
+		parameterType="study.spring.simplespring.model.Reply"
+		resultMap="replyMap">
+		SELECT ReplyId, Re_Title, Re_Content,
+		DATE_FORMAT(Re_CreationDate,'%Y-%m-%d') AS Re_CreationDate,
+		r.BoardId, r.MemberId, u.UserName
+		FROM Reply r
+		INNER JOIN User u ON r.MemberId = u.MemberId
+		INNER JOIN board b ON (r.BoardId = b.BoardId) AND r.BoardId = #{BoardId}	
+		
+		ORDER BY ReplyId DESC
+	</select>
+	
+	<!-- 데이터 저장을 위한 기능 정의 -->
+	<insert id="insertItem"
+		parameterType="study.spring.simplespring.model.Reply"
+		useGeneratedKeys="true" keyProperty="ReplyId">
+		INSERT INTO Reply (Re_Title, Re_Content, Re_CreationDate, BoardId, MemberId) 
+		VALUES (#{Re_Title}, #{Re_Content}, now(), #{BoardId}, #{MemberId})
+	</insert>
+	
+	<!-- 데이터 삭제를 위한 기능 정의 -->
+	<delete id="deleteItem"
+		parameterType="study.spring.simplespring.model.Reply">
+		DELETE FROM Reply WHERE ReplyId=#{ReplyId}
+	</delete>
+
+	<!-- 데이터 갱신을 위한 기능 정의 -->
+	<update id="updateItem"
+		parameterType="study.spring.simplespring.model.Reply">
+		UPDATE Reply SET
+		Re_Title=#{Re_Title}, Re_Content=#{Re_Content}, Re_CreationDate=now(),
+		BoardId=#{BoardId}, MemberId=#{MemberId}
+		WHERE ReplyId=#{ReplyId}
+	</update>
+	
+	<select id="selectItem1_1"
+		parameterType="study.spring.simplespring.model.Reply"
+		resultMap="replyMap">
+		SELECT ReplyId, Re_Title, Re_Content,
+		DATE_FORMAT(Re_CreationDate,'%Y-%m-%d') AS Re_CreationDate,BoardId,MemberId,b.BoardId,b.Category,u.UserName FROM Reply r
+		INNER JOIN User u ON (r.MemberId = #{MemberId} AND  u.MemberId = #{MemberId}) AND Category = 5
+	</select>
+	
+	<insert id="insertItemadmin1_1"
+		parameterType="study.spring.simplespring.model.Reply"
+		useGeneratedKeys="true" keyProperty="ReplyId">
+		INSERT INTO Reply
+		(Re_Title, Re_Content, Re_CreationDate, BoardId, MemberId,Reply_Ok)
+		VALUES (#{Re_Title}, #{Re_Content}, now(), #{BoardId}, #{MemberId},1)
+
+	</insert>
+	
+	<select id="selectItemadmin1_1"
+		parameterType="study.spring.simplespring.model.Reply"
+		resultMap="replyMap">
+		SELECT ReplyId, Re_Title, Re_Content,
+		DATE_FORMAT(Re_CreationDate,'%Y-%m-%d') AS Re_CreationDate,
+		r.BoardId, r.MemberId, b.BoardId FROM connect5.reply r 
+		inner join connect5.board b On r.BoardId = b.BoardId AND r.BoardId = #{BoardId}
+	</select>
+	
+	<select id="selectListadmin1_1"
+		parameterType="study.spring.simplespring.model.Reply"
+		resultMap="replyMap">
+		SELECT ReplyId, Re_Title, Re_Content,
+		DATE_FORMAT(Re_CreationDate,'%Y-%m-%d') AS Re_CreationDate, Reply_Ok,
+		r.BoardId, r.MemberId, u.UserName
+		FROM Reply r
+		INNER JOIN User u ON r.MemberId = u.MemberId
+		INNER JOIN board b ON (r.BoardId = b.BoardId) AND r.BoardId = #{BoardId}	
+		
+		ORDER BY ReplyId DESC
+	</select>
+</mapper>

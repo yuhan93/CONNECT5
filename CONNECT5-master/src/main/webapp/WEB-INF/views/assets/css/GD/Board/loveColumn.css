@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+.table-responsive #num {
+	width: 90px;
+}
+
+.table-responsive #date {
+	width: 50px;
+}
+
+.dropdown {
+	float: right;
+	padding-bottom: 10px;
+}
+
+#pagination {
+	width: 270px;
+	margin: auto;
+}
+
+#context {
+	height: 300px;
+}
+
+#textarea {
+	width: 750px;
+	border: 0;
+}
+
+#contentarea {
+	width: 850px;
+	height: 300px;
+	border: 0;
+}
+
+#write{
+	margin-left:700px;
+}

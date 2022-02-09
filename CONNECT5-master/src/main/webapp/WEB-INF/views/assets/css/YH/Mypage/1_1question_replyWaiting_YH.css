@@ -1,0 +1,41 @@
+@charset "utf-8";
+
+#middle {
+	height: 800px;
+}
+
+.table-responsive #num {
+	width: 90px;
+}
+
+.table-responsive #date {
+	width: 50px;
+}
+
+.dropdown {
+	float: right;
+	padding-bottom: 10px;
+}
+
+#pagination {
+	width: 270px;
+	margin: auto;
+}
+
+#context {
+	height: 150px;
+	padding-left: 10px;
+	padding-top: 10px;
+	user-select: none;
+}
+
+#textarea {
+	width: 750px;
+	border: 0;
+}
+
+#contentarea {
+	width: 850px;
+	height: 300px;
+	border: 0;
+}

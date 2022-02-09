@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+.user_name, .user_email , .verify_num{
+			font-size:20px;
+		}
+		/* 입력 영역 위치 조정*/
+		fieldset{
+			padding: 30px;
+
+		}
+		/* 비밀번호 페이지 링크 */
+		#changeForm{
+			font-size: 15px;
+			text-align:right;
+			font-color: blue;
+		}
+		/*인증 확인 버튼*/
+		#verify_ok{
+			text-decoration: line;
+			text-align: center;
+			font-size:20px;
+		}
+		/*메일 발송 */
+		#submit{
+			font-size:20px;
+		}
+		   hr {
+         color: red;
+         border-color: red;
+         text-align: center;
+      }
+       /* 카운트 다운 */ 
+      .count{
+      	padding-left: 15px;
+
+      }
+      
+      /* 인증번호 */      
+      #get_Num{
+      	padding-left: : 10px;
+      }
